@@ -189,6 +189,8 @@ class App extends React.Component {
       );
     }
 
+    const sortedUserData = usersData.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+
     let title;
     switch(section){
       case SECTIONS.MASTER:
@@ -249,7 +251,7 @@ class App extends React.Component {
           <Divider />
           <List>{mainListItems(this.onMenuClick)}</List>
           <Divider />
-          <List>{secondaryListItems(usersData, this.onMenuClick)}</List>
+          <List>{secondaryListItems(sortedUserData, this.onMenuClick)}</List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
