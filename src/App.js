@@ -176,7 +176,7 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { loading, usersData } = this.state;
+    const { loading, usersData, section, selectedUser } = this.state;
 
     if( loading ){
       return (      
@@ -187,6 +187,21 @@ class App extends React.Component {
           </Grid> 
         </div>
       );
+    }
+
+    let title;
+    switch(section){
+      case SECTIONS.MASTER:
+        title = 'Master List';
+        break;
+      case SECTIONS.SCORES:
+        title = 'Scores';
+        break;
+      case SECTIONS.USER_DETAIL:
+        title = `${selectedUser}'s Details`;
+        break;
+      default:
+        title = 'Game of Thrones - Dead or Alive';
     }
 
     return (
@@ -215,7 +230,7 @@ class App extends React.Component {
               noWrap
               className={classes.title}
             >
-              Game of Thrones - Dead or Alive
+              {title}
             </Typography>           
           </Toolbar>
         </AppBar>

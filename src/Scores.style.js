@@ -1,10 +1,9 @@
 export const styles = {
   root: {
-    width: '350px',
+    width: 450,
     overflowX: 'auto',
   },
   table: {
-    minWidth: 350,
-    maxWidth: 350,
+    width: '100%',    
   },
 };

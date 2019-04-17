@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { styles } from './UserList.style';
-import { Typography } from '@material-ui/core';
 
 function MasterList(props) {
   const { classes, userData, masterList } = props;
@@ -20,36 +19,30 @@ function MasterList(props) {
   }
 
   return (
-    <div>
-      <Typography variant="h3" gutterBottom>
-        {userData.name}'s Details
-      </Typography>
-
-      <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Character</TableCell>
-              <TableCell>Status</TableCell>
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Character</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedList.map(n => (
+            <TableRow key={n.name} hover={true}>
+              <TableCell component="th" scope="row">
+                {n.name}
+              </TableCell>
+              <TableCell
+                className={isCorrect(n) ? classes.correct : classes.incorrect}
+              >
+                {n.status}
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedList.map(n => (
-              <TableRow key={n.name}>
-                <TableCell component="th" scope="row">
-                  {n.name}
-                </TableCell>
-                <TableCell
-                  className={isCorrect(n) ? classes.correct : classes.incorrect}
-                >
-                  {n.status}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
-    </div>    
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
   );
 }
 

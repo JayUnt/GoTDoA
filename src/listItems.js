@@ -10,6 +10,9 @@ import { SECTIONS } from './constants';
 
 export const mainListItems = (onClick) => (
   <div>
+    <ListItem>
+      <ListItemText primary="Game of Thrones" secondary="Dead or Alive" />
+    </ListItem>
     <ListItem button onClick={() => onClick(SECTIONS.SCORES)}>
       <ListItemIcon>
         <AssignmentIcon />
