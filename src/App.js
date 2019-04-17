@@ -72,8 +72,8 @@ class App extends React.Component {
   }  
   
   getSheetUrl(sheets){
-    const apiKey = 'AIzaSyDdAo1KdA4D58W0unTPDQ3AWxCRfHHdl1w';
-    const sheetId = '1Dwbp9HUACShA9cFlEw3GF14qJYbRH9F4SCjXgYsde6k';
+    const apiKey = process.env.REACT_APP_GOOGLE_ANALYTICS_API_KEY;
+    const sheetId = process.env.REACT_APP_GOOGLE_SHEET_ID;
     
     let ranges;
     if( typeof sheets === 'string'){
