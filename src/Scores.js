@@ -11,8 +11,12 @@ import { styles } from './Scores.style';
 import { Typography } from '@material-ui/core';
 
 function Scores(props) {
-  const { classes, scores } = props;
+  const { classes, scores, masterList } = props;
   const sortedScores = scores.sort((a, b) => parseInt(b.TotalScore) - parseInt(a.TotalScore));
+
+  const totalLength = masterList.length;
+
+  console.log(masterList);
 
   return (
     <div>
@@ -26,6 +30,7 @@ function Scores(props) {
             <TableRow>
               <TableCell>User</TableCell>
               <TableCell align="right">Score</TableCell>
+              <TableCell align="right">Percent Correct</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -35,6 +40,7 @@ function Scores(props) {
                   {n.User}
                 </TableCell>
                 <TableCell align="right">{n.TotalScore}</TableCell>
+                <TableCell align="right">{ Math.round( (n.TotalScore / totalLength) * 10000) / 100 }%</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -47,6 +53,7 @@ function Scores(props) {
 Scores.propTypes = {
   classes: PropTypes.object.isRequired,
   scores: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  masterList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default withStyles(styles)(Scores);

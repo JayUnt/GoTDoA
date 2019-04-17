@@ -155,18 +155,17 @@ class App extends React.Component {
   }
 
   renderContent(){
-    const { section } = this.state;
+    const { section, master } = this.state;
     
     if( section === SECTIONS.SCORES ){
       const { scores } = this.state;
-      return <Scores scores={scores} />;
+      return <Scores scores={scores} masterList={master} />;
     }
     else if( section === SECTIONS.MASTER ){
-      const { master } = this.state;
       return <MasterList list={master} />;
     }
     else{
-      const { selectedUser, usersData, master } = this.state;
+      const { selectedUser, usersData } = this.state;
       const userData = usersData.find(u => u.name === selectedUser);
           
       return (
