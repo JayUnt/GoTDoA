@@ -24,13 +24,13 @@ export const mainListItems = (isOpen, onClick) => {
       </ListItem>
       <ListItem button onClick={() => onClick(SECTIONS.SCORES)}>
         <ListItemIcon>
-          <AssignmentIcon />
+          <AssignmentIcon titleAccess="Scores" />
         </ListItemIcon>
         <ListItemText primary="Scores" />
       </ListItem>
       <ListItem button onClick={() => onClick(SECTIONS.MASTER)}>
         <ListItemIcon>
-          <ViewListIcon />
+          <ViewListIcon titleAccess="Master" />
         </ListItemIcon>
         <ListItemText primary="Master" />
       </ListItem>    
@@ -51,7 +51,7 @@ export const secondaryListItems = (users, onClick) => {
         return (
           <ListItem button key={u.name} onClick={() => onClick(SECTIONS.USER_DETAIL, u.name)}>
             <ListItemIcon>
-              <PeopleIcon />
+              <PeopleIcon titleAccess={u.name} />
             </ListItemIcon>
             <ListItemText primary={u.name} />
           </ListItem>
