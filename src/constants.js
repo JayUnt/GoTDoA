@@ -1,0 +1,5 @@
+export const SECTIONS = {
+  SCORES: 'SCORES',
+  MASTER: 'MASTER',
+  USER_DETAIL: 'USER_DETAIL',
+}
