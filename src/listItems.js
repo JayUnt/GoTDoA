@@ -8,25 +8,35 @@ import ViewListIcon from '@material-ui/icons/ViewList';
 import PeopleIcon from '@material-ui/icons/People';
 import { SECTIONS } from './constants';
 
-export const mainListItems = (onClick) => (
-  <div>
-    <ListItem>
-      <ListItemText primary="Game of Thrones" secondary="Dead or Alive" />
-    </ListItem>
-    <ListItem button onClick={() => onClick(SECTIONS.SCORES)}>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Scores" />
-    </ListItem>
-    <ListItem button onClick={() => onClick(SECTIONS.MASTER)}>
-      <ListItemIcon>
-        <ViewListIcon />
-      </ListItemIcon>
-      <ListItemText primary="Master" />
-    </ListItem>    
-  </div>
-);
+export const mainListItems = (isOpen, onClick) => {
+  
+  let primaryTitle = "Game of Thrones";
+  let secondaryTitle = "Dead or Alive";
+  if( !isOpen ){
+    primaryTitle = "GoT";
+    secondaryTitle = "DoA";
+  }
+
+  return (
+    <div>
+      <ListItem>
+        <ListItemText primary={primaryTitle} secondary={secondaryTitle} />
+      </ListItem>
+      <ListItem button onClick={() => onClick(SECTIONS.SCORES)}>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Scores" />
+      </ListItem>
+      <ListItem button onClick={() => onClick(SECTIONS.MASTER)}>
+        <ListItemIcon>
+          <ViewListIcon />
+        </ListItemIcon>
+        <ListItemText primary="Master" />
+      </ListItem>    
+    </div>
+  );
+};
 
 export const secondaryListItems = (users, onClick) => {
   

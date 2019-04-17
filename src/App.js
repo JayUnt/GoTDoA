@@ -249,7 +249,7 @@ class App extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems(this.onMenuClick)}</List>
+          <List>{mainListItems(this.state.open, this.onMenuClick)}</List>
           <Divider />
           <List>{secondaryListItems(sortedUserData, this.onMenuClick)}</List>
         </Drawer>
