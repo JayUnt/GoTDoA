@@ -15,7 +15,11 @@ function MasterList(props) {
   
   const isCorrect = (guess) =>{
     const correct = masterList.find(i => i.Name === guess.name);
-    return correct.Status === guess.status;
+    if( !correct ){
+      console.log(`${guess.name} not found in master list`);
+      return false;
+    }
+    return correct.status === guess.status;
   }
 
   return (

@@ -13,31 +13,49 @@ function Scores(props) {
   const { classes, scores, masterList } = props;
   const sortedScores = scores.sort((a, b) => parseInt(b.TotalScore) - parseInt(a.TotalScore));
 
-  const totalLength = masterList.length;
+  const totalLength = masterList.length;  
+  const currentKillCount = masterList.filter(i => i.status === 'DEAD').length;
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>User</TableCell>
-            <TableCell align="right">Score</TableCell>
-            <TableCell align="right">Percent Correct</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {sortedScores.map(n => (
-            <TableRow key={n.User} hover={true}>
+    <div>
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableBody>
+            <TableRow>
               <TableCell component="th" scope="row">
-                {n.User}
+                Current Kill Count
               </TableCell>
-              <TableCell align="right">{n.TotalScore}</TableCell>
-              <TableCell align="right">{ Math.round( (n.TotalScore / totalLength) * 10000) / 100 }%</TableCell>
+              <TableCell align="right">{currentKillCount}</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
+          </TableBody>
+        </Table>
+      </Paper>
+    
+      <Paper className={`${classes.root} ${classes.spacer}`}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>User</TableCell>
+              <TableCell align="right">Score</TableCell>
+              <TableCell align="right">Percent Correct</TableCell>
+              <TableCell align="right">Guessed Kills</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedScores.map(n => (
+              <TableRow key={n.User} hover={true}>
+                <TableCell component="th" scope="row">
+                  {n.User}
+                </TableCell>
+                <TableCell align="right">{n.TotalScore}</TableCell>
+                <TableCell align="right">{ Math.round( (n.TotalScore / totalLength) * 10000) / 100 }%</TableCell>
+                <TableCell align="right">{n.GuessedKillCount}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
   );
 }
 

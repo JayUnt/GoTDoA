@@ -6,5 +6,5 @@ export const styles = {
   table: {
     minWidth: 350,
     maxWidth: 350,
-  },
+  }
 };

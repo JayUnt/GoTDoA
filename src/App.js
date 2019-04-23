@@ -55,7 +55,13 @@ class App extends React.Component {
         for (let i = 1; i < values.length; i++) {
           let rowobject = {};
           for (let j = 0; j < values[i].length; j++) {
-            rowobject[values[0][j]] = values[i][j];
+
+            let key = values[0][j];
+            if( initDataKey === 'Master'){
+              key = key.toLowerCase();
+            }
+
+            rowobject[key] = values[i][j];
           }
           initDataValues.push(rowobject);
         }

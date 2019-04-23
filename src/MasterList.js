@@ -11,7 +11,7 @@ import { styles } from './MasterList.style';
 
 function MasterList(props) {
   const { classes, list } = props;
-  const sortedList = list.sort((a, b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0));
+  const sortedList = list.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
   return (
     <Paper className={classes.root}>
