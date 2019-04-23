@@ -14,7 +14,7 @@ function MasterList(props) {
   const sortedList = userData.guesses.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
   
   const isCorrect = (guess) =>{
-    const correct = masterList.find(i => i.Name === guess.name);
+    const correct = masterList.find(i => i.name === guess.name);
     if( !correct ){
       console.log(`${guess.name} not found in master list`);
       return false;
