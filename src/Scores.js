@@ -14,7 +14,7 @@ function Scores(props) {
   const sortedScores = scores.sort((a, b) => parseInt(b.TotalScore) - parseInt(a.TotalScore));
 
   const totalLength = masterList.length;  
-  const currentKillCount = masterList.filter(i => i.status === 'DEAD').length;
+  const currentDeathCount = masterList.filter(i => i.status === 'DEAD').length;
 
   return (
     <div>
@@ -23,9 +23,9 @@ function Scores(props) {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
-                Current Kill Count
+                Current Death Count
               </TableCell>
-              <TableCell align="right">{currentKillCount}</TableCell>
+              <TableCell align="right">{currentDeathCount}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -38,7 +38,7 @@ function Scores(props) {
               <TableCell>User</TableCell>
               <TableCell align="right">Score</TableCell>
               <TableCell align="right">Percent Correct</TableCell>
-              <TableCell align="right">Guessed Kills</TableCell>
+              <TableCell align="right">Guessed Deaths</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -49,7 +49,7 @@ function Scores(props) {
                 </TableCell>
                 <TableCell align="right">{n.TotalScore}</TableCell>
                 <TableCell align="right">{ Math.round( (n.TotalScore / totalLength) * 10000) / 100 }%</TableCell>
-                <TableCell align="right">{n.GuessedKillCount}</TableCell>
+                <TableCell align="right">{n.GuessedDeathCount}</TableCell>
               </TableRow>
             ))}
           </TableBody>
