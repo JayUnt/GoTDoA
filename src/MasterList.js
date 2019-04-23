@@ -24,11 +24,11 @@ function MasterList(props) {
         </TableHead>
         <TableBody>
           {sortedList.map(n => (
-            <TableRow key={n.Name} hover={true}>
+            <TableRow key={n.name} hover={true}>
               <TableCell component="th" scope="row">
-                {n.Name}
+                {n.name}
               </TableCell>
-              <TableCell>{n.Status}</TableCell>
+              <TableCell>{n.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
