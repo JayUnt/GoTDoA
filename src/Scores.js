@@ -8,13 +8,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { styles } from './Scores.style';
+import { CHARACTER_STATUS } from './constants';
 
 function Scores(props) {
   const { classes, scores, masterList } = props;
   const sortedScores = scores.sort((a, b) => parseInt(b.TotalScore) - parseInt(a.TotalScore));
 
   const totalLength = masterList.length;  
-  const currentDeathCount = masterList.filter(i => i.status === 'DEAD').length;
+  const currentDeathCount = masterList.filter(i => i.status === CHARACTER_STATUS.DEAD).length;
 
   return (
     <div>

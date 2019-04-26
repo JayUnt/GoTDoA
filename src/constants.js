@@ -3,3 +3,8 @@ export const SECTIONS = {
   MASTER: 'MASTER',
   USER_DETAIL: 'USER_DETAIL',
 }
+
+export const CHARACTER_STATUS = {
+  ALIVE: 'ALIVE',
+  DEAD: 'DEAD',
+}

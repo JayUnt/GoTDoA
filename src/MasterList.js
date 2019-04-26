@@ -6,15 +6,21 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { styles } from './MasterList.style';
+import { CHARACTER_STATUS } from './constants';
 
 function MasterList(props) {
   const { classes, list } = props;
   const sortedList = list.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
-  return (
-    <Paper className={classes.root}>
+  const aliveList = sortedList.filter(i => i.status === CHARACTER_STATUS.ALIVE);
+  const deadList = sortedList.filter(i => i.status === CHARACTER_STATUS.DEAD);
+  
+
+  const renderTable = (list) => {
+    return (
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -23,7 +29,7 @@ function MasterList(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {sortedList.map(n => (
+          {list.map(n => (
             <TableRow key={n.name} hover={true}>
               <TableCell component="th" scope="row">
                 {n.name}
@@ -33,7 +39,22 @@ function MasterList(props) {
           ))}
         </TableBody>
       </Table>
-    </Paper>
+    )
+  }
+
+  return (
+    <Grid container spacing={24} className={classes.root}>
+      <Grid item>
+        <Paper>
+          {renderTable(aliveList)}
+        </Paper>
+      </Grid>
+      <Grid item>
+        <Paper className={classes.root}>
+          {renderTable(deadList)}
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
 

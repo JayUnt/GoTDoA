@@ -1,7 +1,6 @@
 export const styles = {
   root: {
-    width: '350px',
-    overflowX: 'auto',
+    flexGrow: 1,
   },
   table: {
     minWidth: 350,
