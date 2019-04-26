@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -23,19 +22,12 @@ function MasterList(props) {
   const renderTable = (list) => {
     return (
       <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Character</TableCell>
-            <TableCell>Status</TableCell>
-          </TableRow>
-        </TableHead>
         <TableBody>
           {list.map(n => (
             <TableRow key={n.name} hover={true}>
               <TableCell component="th" scope="row">
                 {n.name}
               </TableCell>
-              <TableCell>{n.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -46,7 +38,7 @@ function MasterList(props) {
   return (
     <Grid container spacing={24} className={classes.root}>
       <Grid item>
-        <Paper>
+        <Paper className={classes.paper}>
           <Typography variant="h5" component="h3" className={classes.tableHeader}>
             Alive
           </Typography>
@@ -54,7 +46,7 @@ function MasterList(props) {
         </Paper>
       </Grid>
       <Grid item>
-        <Paper className={classes.root}>
+        <Paper className={classes.paper}>
           <Typography variant="h5" component="h3" className={classes.tableHeader}>
             Dead
           </Typography>
