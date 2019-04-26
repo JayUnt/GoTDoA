@@ -8,6 +8,6 @@ export const styles = {
   },
   tableHeader:{
     textAlign: 'center',
-    paddingTop: 20,
+    paddingTop: 15,
   }
 };
