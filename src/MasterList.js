@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { styles } from './MasterList.style';
 import { CHARACTER_STATUS } from './constants';
+import { Typography } from '@material-ui/core';
 
 function MasterList(props) {
   const { classes, list } = props;
@@ -46,11 +47,17 @@ function MasterList(props) {
     <Grid container spacing={24} className={classes.root}>
       <Grid item>
         <Paper>
+          <Typography variant="h5" component="h3" className={classes.tableHeader}>
+            Alive
+          </Typography>
           {renderTable(aliveList)}
         </Paper>
       </Grid>
       <Grid item>
         <Paper className={classes.root}>
+          <Typography variant="h5" component="h3" className={classes.tableHeader}>
+            Dead
+          </Typography>
           {renderTable(deadList)}
         </Paper>
       </Grid>
