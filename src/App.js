@@ -43,7 +43,7 @@ class App extends React.Component {
   }
   
   loadInitialData(){
-    const initDataUrl = this.getSheetUrl(['Scores', 'Master']);
+    const initDataUrl = this.getSheetUrl(['Users', 'Master']);
         
     fetch(initDataUrl).then(response => response.json()).then(data => {
       const initData = {};
@@ -114,8 +114,8 @@ class App extends React.Component {
   }
   
   loadUserData(){
-    const { master, scores, numWeeks } = this.state;    
-    const users = scores.map(s => s.User);
+    const { master, users: usersSheet, numWeeks } = this.state;    
+    const users = usersSheet.map(s => s.User);
    
     const userUrl = this.getSheetUrl(users);
         
