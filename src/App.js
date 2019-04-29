@@ -15,11 +15,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from './listItems';
 import Scores from './Scores';
 import MasterList from './MasterList';
-import { SECTIONS } from './constants';
+import { SECTIONS, CHARACTER_STATUS } from './constants';
 import { styles } from './App.style';
 import UserList from './UserList';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Grid } from '@material-ui/core';
+import { buildUserScores, getWeekScore } from './utils/scoreUtils';
 
 class App extends React.Component {
 
@@ -33,6 +34,7 @@ class App extends React.Component {
       scores: null,
       selectedUser: null,
       usersData: null,
+      numWeeks: null,
     };
   }
 
@@ -68,14 +70,16 @@ class App extends React.Component {
         
         initData[initDataKey.toLowerCase()] = initDataValues;
       }
-      
-      this.setState({
-        ...initData
-      });      
-      
-      this.loadUserData();
+
+      this.setState(
+        {
+          ...initData,
+          numWeeks: this.getNumWeeks(initData.master || null)
+        },
+        this.loadUserData
+      );
     });
-  }  
+  }
   
   getSheetUrl(sheets){
     const apiKey = process.env.REACT_APP_GOOGLE_ANALYTICS_API_KEY;
@@ -110,7 +114,7 @@ class App extends React.Component {
   }
   
   loadUserData(){
-    const { scores } = this.state;    
+    const { master, scores, numWeeks } = this.state;    
     const users = scores.map(s => s.User);
    
     const userUrl = this.getSheetUrl(users);
@@ -126,23 +130,48 @@ class App extends React.Component {
         };
         
         let userGuesses = data.valueRanges[i].values;  
+
         for (let i = 1; i < userGuesses.length; i++) {
           let rowobject = {};
           for (let j = 0; j < userGuesses[i].length; j++) {
+
+           
             rowobject[userGuesses[0][j].toLowerCase()] = userGuesses[i][j];
           }
+
           userData.guesses.push(rowobject);
         }
         
-        usersData.push(userData);   
+        userData.scores = buildUserScores(master, userData, numWeeks);
+        userData.guessedDeathCount = userData.guesses.filter(g => g.status === CHARACTER_STATUS.DEAD).length;
+
+        usersData.push(userData);
       }
       
       this.setState({
         loading: false,
         usersData
       });
-    });
-   
+    });   
+  }
+
+  getNumWeeks(masterList){
+
+    if( !masterList || masterList.length === 0 ){
+      return 0;
+    }
+
+    const keys = Object.keys(masterList[0]);
+    let weekExists = true    
+    let currWeekNum = 0;
+    while(weekExists){
+      weekExists = keys.includes(`week${currWeekNum + 1}`);
+      if( weekExists ){
+        currWeekNum++;
+      }
+    }
+
+    return currWeekNum;
   }
 
   handleDrawerOpen = () => {
@@ -161,21 +190,22 @@ class App extends React.Component {
   }
 
   renderContent(){
-    const { section, master } = this.state;
+    const { section, master, numWeeks } = this.state;
     
     if( section === SECTIONS.SCORES ){
-      const { scores } = this.state;
-      return <Scores scores={scores} masterList={master} />;
+      const { usersData } = this.state;
+      const scores = getWeekScore(numWeeks, usersData);
+      return <Scores scores={scores} masterList={master} numWeeks={numWeeks} />;
     }
     else if( section === SECTIONS.MASTER ){
-      return <MasterList list={master} />;
+      return <MasterList list={master} numWeeks={numWeeks} />;
     }
     else{
       const { selectedUser, usersData } = this.state;
       const userData = usersData.find(u => u.name === selectedUser);
           
       return (
-        <UserList userData={userData} masterList={master} />        
+        <UserList userData={userData} masterList={master} numWeeks={numWeeks} />        
       );
     }
   }

@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { styles } from './UserList.style';
 
 function MasterList(props) {
-  const { classes, userData, masterList } = props;
+  const { classes, userData, masterList, numWeeks } = props;
   const sortedList = userData.guesses.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
   
   const isCorrect = (guess) =>{
@@ -19,7 +19,7 @@ function MasterList(props) {
       console.log(`${guess.name} not found in master list`);
       return false;
     }
-    return correct.status === guess.status;
+    return correct[`week${numWeeks}`].trim() === guess.status.trim();
   }
 
   return (

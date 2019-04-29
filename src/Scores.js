@@ -11,11 +11,11 @@ import { styles } from './Scores.style';
 import { CHARACTER_STATUS } from './constants';
 
 function Scores(props) {
-  const { classes, scores, masterList } = props;
-  const sortedScores = scores.sort((a, b) => parseInt(b.TotalScore) - parseInt(a.TotalScore));
+  const { classes, scores, masterList, numWeeks } = props;
+  const sortedScores = scores.sort((a, b) => parseInt(b.score) - parseInt(a.score));
 
   const totalLength = masterList.length;  
-  const currentDeathCount = masterList.filter(i => i.status === CHARACTER_STATUS.DEAD).length;
+  const currentDeathCount = masterList.filter(i => i[`week${numWeeks}`] === CHARACTER_STATUS.DEAD).length;
 
   return (
     <div>
@@ -44,13 +44,13 @@ function Scores(props) {
           </TableHead>
           <TableBody>
             {sortedScores.map(n => (
-              <TableRow key={n.User} hover={true}>
+              <TableRow key={n.name} hover={true}>
                 <TableCell component="th" scope="row">
-                  {n.User}
+                  {n.name}
                 </TableCell>
-                <TableCell align="right">{n.TotalScore}</TableCell>
-                <TableCell align="right">{ Math.round( (n.TotalScore / totalLength) * 10000) / 100 }%</TableCell>
-                <TableCell align="right">{n.GuessedDeathCount}</TableCell>
+                <TableCell align="right">{n.score}</TableCell>
+                <TableCell align="right">{ Math.round( (n.score / totalLength) * 10000) / 100 }%</TableCell>
+                <TableCell align="right">{n.guessedDeathCount}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -12,11 +12,12 @@ import { CHARACTER_STATUS } from './constants';
 import { Typography } from '@material-ui/core';
 
 function MasterList(props) {
-  const { classes, list } = props;
+  const { classes, list, numWeeks } = props;
   const sortedList = list.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
-  const aliveList = sortedList.filter(i => i.status === CHARACTER_STATUS.ALIVE);
-  const deadList = sortedList.filter(i => i.status === CHARACTER_STATUS.DEAD);
+  const statusProp = `week${numWeeks}`;
+  const aliveList = sortedList.filter(i => i[statusProp] === CHARACTER_STATUS.ALIVE);
+  const deadList = sortedList.filter(i => i[statusProp] === CHARACTER_STATUS.DEAD);
   
 
   const renderTable = (list) => {
