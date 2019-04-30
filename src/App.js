@@ -21,6 +21,7 @@ import UserList from './UserList';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Grid } from '@material-ui/core';
 import { buildUserScores, getWeekScore } from './utils/scoreUtils';
+import Charts from './Charts';
 
 class App extends React.Component {
 
@@ -63,7 +64,7 @@ class App extends React.Component {
               key = key.toLowerCase();
             }
 
-            rowobject[key] = values[i][j];
+            rowobject[key] = values[i][j].trim();
           }
           initDataValues.push(rowobject);
         }
@@ -136,7 +137,7 @@ class App extends React.Component {
           for (let j = 0; j < userGuesses[i].length; j++) {
 
            
-            rowobject[userGuesses[0][j].toLowerCase()] = userGuesses[i][j];
+            rowobject[userGuesses[0][j].toLowerCase()] = userGuesses[i][j].trim();
           }
 
           userData.guesses.push(rowobject);
@@ -190,18 +191,20 @@ class App extends React.Component {
   }
 
   renderContent(){
-    const { section, master, numWeeks } = this.state;
+    const { section, usersData, master, numWeeks } = this.state;
     
     if( section === SECTIONS.SCORES ){
-      const { usersData } = this.state;
       const scores = getWeekScore(numWeeks, usersData);
       return <Scores scores={scores} masterList={master} numWeeks={numWeeks} />;
+    }    
+    else if( section === SECTIONS.CHARTS ){
+      return <Charts usersData={usersData} numWeeks={numWeeks} />;
     }
     else if( section === SECTIONS.MASTER ){
       return <MasterList list={master} numWeeks={numWeeks} />;
     }
     else{
-      const { selectedUser, usersData } = this.state;
+      const { selectedUser } = this.state;
       const userData = usersData.find(u => u.name === selectedUser);
           
       return (
