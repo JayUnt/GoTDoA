@@ -28,6 +28,12 @@ export const mainListItems = (isOpen, onClick) => {
         </ListItemIcon>
         <ListItemText primary="Scores" />
       </ListItem>
+      {/* <ListItem button onClick={() => onClick(SECTIONS.CHARTS)}>
+        <ListItemIcon>
+          <ViewListIcon titleAccess="Charts" />
+        </ListItemIcon>
+        <ListItemText primary="Charts" />
+      </ListItem>     */}
       <ListItem button onClick={() => onClick(SECTIONS.MASTER)}>
         <ListItemIcon>
           <ViewListIcon titleAccess="Master" />

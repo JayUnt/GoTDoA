@@ -1,5 +1,6 @@
 export const SECTIONS = {
   SCORES: 'SCORES',
+  CHARTS: 'CHARTS',
   MASTER: 'MASTER',
   USER_DETAIL: 'USER_DETAIL',
 }
